@@ -4,7 +4,7 @@ How to create a personalized Makefile for simple programs.
 **README IN PROGRESS**
 
 <p align="center">
-  <img width="75" height="82" src="java-button2.png">
+  <img width="237" height="81" src="readmeimage.jpg">
 </p>
 
 If you've ever gone to college for Computer Science, at some point in time your professor will ask for a Makefile. More often than not, they will assume that you know how to make one, or just leave you to your own devices. Let this be your go-to device. 
