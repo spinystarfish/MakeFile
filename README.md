@@ -106,7 +106,35 @@ clean:
 
 ## Java Makefile Template
 
-## Usage example
+A Simple Makefile Example: 
+```sh
+JCC = javac
+OBJECTS = Name.class Name2.class [Insert all class files here]
+
+# the -g flag compiles with debugging information
+#
+JFLAGS = -g
+
+default: $(OBJECTS)
+
+# these target entries build the Class files
+# the Name.class file is dependent on the Name.java file
+# and the rule associated with this entry gives the command to create it
+#
+Name.class: Name.java
+        $(JCC) $(JFLAGS) Name.java
+
+Name2.class: Name2.java
+        $(JCC) $(JFLAGS) Name2.java
+
+# Repeat for any remaining class files
+
+clean: 
+        $(RM) *.class
+```
+Notice this Makefile is capable of compiling multiple java files into the executable. Add/Alter the contents of the OBJECTS and JFLAGS for your program. For a list of javac flags, click [here](https://docs.oracle.com/javase/7/docs/technotes/tools/windows/javac.html). 
+
+## Usage Example
 
 Once you have created your Makefile, you should be able to use it from whichever directory it is stored in. Make sure your Makefile is in the same folder as all the files it requires.
 
@@ -114,12 +142,11 @@ To 'Make' the executable type:
 ```sh
 make
 ```
+
 To clean up the folder, removing all object, tar, and executable file types:
 ```sh
 make clean
 ```
-
-![](header3.jpg)
 
 ## Meta
 
@@ -136,6 +163,15 @@ Distributed under the MIT license. See ``LICENSE`` for more information.
 3. Commit your changes (`git commit -am 'Add some fooBar'`)
 4. Push to the branch (`git push origin feature/fooBar`)
 5. Create a new Pull Request
+
+## Special Thanks
+Thank you to the following resources for information concerning the various Makefile examples.
+
+[CS Department at College of Swarthmore](https://www.cs.swarthmore.edu/~newhall/unixhelp/howto_makefiles.html)
+
+[GNU User's Guide for Native Platforms](https://gcc.gnu.org/onlinedocs/gnat_ugn/Interfacing-to-C.html)
+
+[GNU User's Guide: Gnatmake](http://www.cs.fsu.edu/~baker/ada/gnat/html/gnat_ugn_7.html#SEC89)
 
 <!-- Markdown link & img dfn's -->
 [npm-image]: https://img.shields.io/npm/v/datadog-metrics.svg?style=flat-square
