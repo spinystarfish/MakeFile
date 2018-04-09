@@ -1,0 +1,12 @@
+TARGET = Executable_Name
+
+$(TARGET):
+        gnatmake -f -o $(TARGET) -q main.adb -cargs -bargs -l
+#
+# Clean the src dirctory
+#
+clean:
+        rm -rf *.o
+        rm -f *.tar
+        rm -f $(TARGET)
+        rm -f *.ali
