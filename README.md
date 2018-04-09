@@ -16,8 +16,22 @@ If you've ever gone to college for Computer Science, at some point in time your 
 ## Ada Makefile Template
 For a single .adb Ada project file:
 ```sh
-Insert Template Here
+TARGET = [Insert Executable Name Here]
+
+$(TARGET):
+        gnatmake -f -o $(TARGET) -q main.adb -cargs -bargs -l
+#
+# Clean the src dirctory
+#
+clean:
+        rm -rf *.o
+        rm -f *.tar
+        rm -f $(TARGET)
+        rm -f *.ali
+
 ```
+Replace main.adb with the name of your file.
+
 For an Ada project with multiple object files:
 ```sh
 TARGET = [Insert Name of .adb file here]
@@ -45,10 +59,49 @@ utils.o : utils.c defs.h
 clean :
         rm edit $(OBJECTS)
 ```
-The -o option specifies the name of the executable file. To have the name of the executable be different from the program name, simply replace the $(TARGET) after -o on line 6 to the name you desire. Please Note that this Makefile does use the GCC compiler along with gnatmake
+The -o option specifies the name of the executable file. To have the name of the executable be different from the program name, simply replace the $(TARGET) after -o on line 6 to the name you desire. Please Note that this Makefile does use the GCC compiler along with gnatmake compiler.
 
 ## C Makefile Template
+The Simple C Makefile:
+```sh
+  # build an executable named myprog from myprog.c
+  all: myprog.c 
+ 	  gcc -g -Wall -o myprog myprog.c
 
+  clean:
+	  $(RM) myprog
+```
+Use your brain - fill in the blanks to customize. If your program is called main.c, then replace myprog.c with main.c. This makefile template uses the GCC compiler.
+
+Makefile Template for multiple object files:
+```sh
+#  -g    adds debugging information to the executable file
+#  -Wall turns on most, but not all, compiler warnings
+#
+# for C++ define  CC = g++
+
+CC = gcc
+CFLAGS  = -g -Wall
+TARGET = [Insert Executable Name Here]
+OBJECTS = name.o, [List .o Files Here]
+
+default: $(TARGET)
+
+$(TARGET):  $(OBJECTS) 
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJECTS)
+
+# To create the object file name.o, we need the source
+# files name.c, and any neccesary .h files:
+#
+name.o:  name.c possible.h possibletwo.h 
+	$(CC) $(CFLAGS) -c name.c
+
+#Repeat this for all the .o files included in your program
+
+clean: 
+	$(RM) count *.o *~
+  ```
+ Typing 'make' or 'make Insert_Executable_Name_Here' will create the executable file. 'make' will invoke the first target entry in the file (which here is the default entry). To start over from scratch, type 'make clean'. This removes the executable and old .o object files as well as any ~ backup files.
 ## Python Makefile Template
 
 ## Java Makefile Template
