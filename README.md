@@ -103,6 +103,50 @@ clean:
   ```
  Typing 'make' or 'make Insert_Executable_Name_Here' will create the executable file. 'make' will invoke the first target entry in the file (which here is the default entry). To start over from scratch, type 'make clean'. This removes the executable and old .o object files as well as any ~ backup files.
 ## Python Makefile Template
+This great Python makefile from Krzysztof Żuraw details a few different functions the makefile is capable of. The clean-pyc rule locates all *.pyc, *.pyo or /*~ files and removes them from your directory. clean-build is for removing build artifacts. The isort executes an isort command using the string input detailed by the -c command. I'm going to be honest and admit I don't know what the function of lint is. test cleans out the directory by running clean-py before running a test.py file to test the program. docker-run builds and runs the docker. I changed the run rule into the default rule that way the script can be invoked with just 'make' instead of 'make run'. Phony at the beginning prevents the makefile from running a file called clean-pyc, if you had one. 
+```sh
+.PHONY: clean-pyc clean-build
+
+HOST=127.0.0.1
+TEST_PATH=./
+
+clean-pyc:
+    find . -name '*.pyc' -exec rm --force {} +
+    find . -name '*.pyo' -exec rm --force {} +
+   name '*~' -exec rm --force  {} 
+
+clean-build:
+    rm --force --recursive build/
+    rm --force --recursive dist/
+    rm --force --recursive *.egg-info
+
+isort:
+    sh -c "isort --skip-glob=.tox --recursive . "
+
+lint:
+    flake8 --exclude=.tox
+
+test: clean-pyc
+    py.test --verbose --color=yes $(TEST_PATH)
+
+
+@If you only want to run this on a local machine, uncomment this and comment out the other run format.
+@default:
+@	python manage.py runsever
+
+default:
+    python manage.py runserver --host $(HOST) --port $(PORT)
+
+docker-run:
+    docker build \
+      --file=./Dockerfile \
+      --tag=my_project ./
+    docker run \
+      --detach=false \
+      --name=my_project \
+      --publish=$(HOST):8080 \
+      my_project
+```
 
 ## Java Makefile Template
 
@@ -152,7 +196,7 @@ make clean
 
 Kenzie Clarke – [Linkedin Page](https://www.linkedin.com/in/kenzieclarke07/) – kenzieclarke@tcu.edu
 
-Distributed under the MIT license. See ``LICENSE`` for more information.
+Distributed under the GPL license. See ``LICENSE`` for more information.
 
 [https://github.com/spinystarfish/github-link](https://github.com/spinystarfish)
 
@@ -172,6 +216,8 @@ Thank you to the following resources for information concerning the various Make
 [GNU User's Guide for Native Platforms](https://gcc.gnu.org/onlinedocs/gnat_ugn/Interfacing-to-C.html)
 
 [GNU User's Guide: Gnatmake](http://www.cs.fsu.edu/~baker/ada/gnat/html/gnat_ugn_7.html#SEC89)
+
+.[Krzysztof Żuraw's Python Makefile](https://krzysztofzuraw.com/blog/2016/makefiles-in-python-projects.html)
 
 <!-- Markdown link & img dfn's -->
 [npm-image]: https://img.shields.io/npm/v/datadog-metrics.svg?style=flat-square
