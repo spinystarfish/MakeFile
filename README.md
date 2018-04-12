@@ -103,7 +103,19 @@ clean:
   ```
  Typing 'make' or 'make Insert_Executable_Name_Here' will create the executable file. 'make' will invoke the first target entry in the file (which here is the default entry). To start over from scratch, type 'make clean'. This removes the executable and old .o object files as well as any ~ backup files.
 ## Python Makefile Template
-This great Python makefile from Krzysztof Żuraw details a few different functions the makefile is capable of. The clean-pyc rule locates all *.pyc, *.pyo, or *~ files and removes them from your directory. clean-build is for removing build artifacts. The isort executes an isort command using the string input detailed by the -c command. I'm going to be honest and admit I don't know what the function of lint is. test cleans out the directory by running clean-py before running a test.py file to test the program. docker-run builds and runs the docker. I changed the run rule into the default rule that way the script can be invoked with just 'make' instead of 'make run'. Phony at the beginning prevents the makefile from running a file called clean-pyc, if you had one. 
+This great Python makefile from Krzysztof Żuraw details a few different functions the makefile is capable of. The clean-pyc rule locates all *.pyc, *.pyo, or *~ files and removes them from your directory. 
+
+clean-build is for removing build artifacts. 
+
+The isort executes an isort command using the string input detailed by the -c command. 
+
+I'm going to be honest and admit I don't know what the function of lint is. 
+
+test cleans out the directory by running clean-py before running a test.py file to test the program. 
+
+docker-run builds and runs the docker.
+
+I changed the run rule into the default rule that way the script can be invoked with just 'make' instead of 'make run'. Phony at the beginning prevents the makefile from running a file called clean-pyc, if you had one. 
 ```sh
 .PHONY: clean-pyc clean-build
 
