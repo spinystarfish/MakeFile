@@ -1,0 +1,19 @@
+#  -g    adds debugging information to the executable file
+#  fpc   defining PC as the fpc compiler
+
+PC = fpc
+PFLAGS  = -g
+TARGET = [Insert Executable Name Here]
+INCLUDE = -I [Insert Path to Header Files]
+LIBS = [Include needed library files/flags]
+
+default: $(TARGET)
+
+$(TARGET):
+	$(PC) $(PFLAGS) $(INLCUDES) $(TARGET).pas $(LIBS)
+
+
+#Remove and clean up uneccessary files
+
+clean: 
+	$(RM) $(TARGET) *.o *~
