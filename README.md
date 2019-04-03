@@ -11,6 +11,8 @@ If you've ever gone to college for Computer Science, at some point in time your 
 
 ![](header1.jpg)
 
+I have listed below different small Makefile templates for different languages. Optionally, I am placing the templates in files for easy download in this repository. Simply select the makefile name with the appropriate language name for your needs (example: pascal_Makefile), change the name to 'Makefile', place in the folder with your code, and run the command 'make' in the console.
+
 ## Generic Makefile Template
 
 ## Ada Makefile Template
