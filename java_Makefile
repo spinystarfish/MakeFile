@@ -1,0 +1,23 @@
+JCC = javac
+OBJECTS = Name.class Name2.class [Insert all class files here]
+
+# the -g flag compiles with debugging information
+#
+JFLAGS = -g
+
+default: $(OBJECTS)
+
+# these target entries build the Class files
+# the Name.class file is dependent on the Name.java file
+# and the rule associated with this entry gives the command to create it
+#
+Name.class: Name.java
+        $(JCC) $(JFLAGS) Name.java
+
+Name2.class: Name2.java
+        $(JCC) $(JFLAGS) Name2.java
+
+# Repeat for any remaining class files
+
+clean: 
+        $(RM) *.class
