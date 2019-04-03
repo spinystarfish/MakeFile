@@ -99,9 +99,36 @@ name.o:  name.c possible.h possibletwo.h
 #Repeat this for all the .o files included in your program
 
 clean: 
-	$(RM) count *.o *~
+	$(RM) $(TARGET) *.o *~
   ```
  Typing 'make' or 'make Insert_Executable_Name_Here' will create the executable file. 'make' will invoke the first target entry in the file (which here is the default entry). To start over from scratch, type 'make clean'. This removes the executable and old .o object files as well as any ~ backup files.
+ 
+## Pascal Makefile Template
+This makefile for Pascal programs is small but mighty. fpc will compile .o files itself and doesn't need you to include them specifically. If you have put the header files in different directories and you are running make in a different
+directory, then it is required to provide the path of header files. This can be done using -I
+option in makefile. Please list the path name to the header files inside quotation marks.
+```
+#  -g    adds debugging information to the executable file
+#  fpc   defining PC as the fpc compiler
+
+PC = fpc
+PFLAGS  = -g
+TARGET = [Insert Executable Name Here]
+INCLUDE = -I [Insert Path to Header Files]
+LIBS = [Include needed library files/flags]
+
+default: $(TARGET)
+
+$(TARGET):
+	$(PC) $(PFLAGS) $(INLCUDES) $(TARGET).pas $(LIBS)
+
+
+#Remove and clean up uneccessary files
+
+clean: 
+	$(RM) $(TARGET) *.o *~
+```
+
 ## Python Makefile Template
 This great Python makefile from Krzysztof Żuraw details a few different functions the makefile is capable of. The clean-pyc rule locates all *.pyc, *.pyo, or *~ files and removes them from your directory. 
 
