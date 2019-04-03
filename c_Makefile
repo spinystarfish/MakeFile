@@ -1,0 +1,25 @@
+#  -g    adds debugging information to the executable file
+#  -Wall turns on most, but not all, compiler warnings
+#
+# for C++ define  CC = g++
+
+CC = gcc
+CFLAGS  = -g -Wall
+TARGET = [Insert Executable Name Here]
+OBJECTS = name.o, [List .o Files Here]
+
+default: $(TARGET)
+
+$(TARGET):  $(OBJECTS) 
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJECTS)
+
+# To create the object file name.o, we need the source
+# files name.c, and any neccesary .h files:
+#
+name.o:  name.c possible.h possibletwo.h 
+	$(CC) $(CFLAGS) -c name.c
+
+#Repeat this for all the .o files included in your program
+
+clean: 
+	$(RM) $(TARGET) *.o *~
