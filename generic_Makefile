@@ -1,0 +1,16 @@
+COMPILERMACRO = [Insert Compiler Name Here]
+FLAGS  = [Insert Desired Flags Here]
+TARGET = [Insert Executable Name Here]
+INCLUDE = -I [Insert Path to Header Files]
+LIBS = [Include needed library files/flags]
+
+default: $(TARGET)
+
+$(TARGET):
+	$(COMPILERMACRO) $(FLAGS) $(INLCUDES) $(TARGET)[Extension Name] $(LIBS)
+
+
+#Remove and clean up uneccessary files
+
+clean: 
+	$(RM) $(TARGET) *.o *~
